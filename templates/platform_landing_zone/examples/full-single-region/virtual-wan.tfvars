@@ -305,21 +305,21 @@ virtual_wan_virtual_hubs = {
       dns_resolver = {
         name = "$${primary_private_dns_resolver_name}"
         inbound_endpoints = {
-          nprd_in_endpoint = {
-            name                         = "nrpd-dns-inbound"
-            subnet_name                  = "nprd-dns-inbound-subnet"
+          pdr_in_endpoint = {
+            name                         = "pdr-dns-inbound"
+            subnet_name                  = "pdr-dns-inbound-subnet"
             private_ip_allocation_method = "Static"
             private_ip_address           = "10.0.4.84"
           }
         }
         outbound_endpoints = {
-          nprd_out_endpoint = {
-            name        = "nrpd-dns-outbound"
-            subnet_name = "nprd-dns-outbound-subnet"
+          pdr_out_endpoint = {
+            name        = "pdr-dns-outbound"
+            subnet_name = "pdr-dns-outbound-subnet"
 
             forwarding_ruleset = {
               ruleset1 = {
-                name = "forwarding-ruleset-nprd"
+                name = "forwarding-ruleset-pdr"
 
                 link_with_outbound_endpoint_virtual_network = true
 
@@ -381,13 +381,7 @@ virtual_wan_virtual_hubs = {
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
       auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
     }
-    private_dns_resolver = {
-      enabled               = "$${primary_private_dns_resolver_enabled}"
-      subnet_address_prefix = "$${primary_private_dns_resolver_subnet_address_prefix}"
-      dns_resolver = {
-        name = "$${primary_private_dns_resolver_name}"
-      }
-    }
+
     bastion = {
       enabled               = "$${primary_bastion_enabled}"
       subnet_address_prefix = "$${primary_bastion_subnet_address_prefix}"
@@ -406,8 +400,8 @@ virtual_wan_virtual_hubs = {
       address_space = ["$${primary_side_car_virtual_network_address_space}"]
       # virtual_network_connection_name = "private_dns_vnet_primary"  # Backwards compatibility
       subnets = {
-        nprd_dns_inbound_subnet = {
-          name           = "nprd-dns-inbound-subnet"
+        pdr_dns_inbound_subnet = {
+          name           = "pdr-dns-inbound-subnet"
           address_prefix = "10.0.4.80/28"
           delegation = [
             {
@@ -418,8 +412,8 @@ virtual_wan_virtual_hubs = {
             }
           ]
         }
-        nprd_dns_outbound_subnet = {
-          name           = "nprd-dns-outbound-subnet"
+        pdr_dns_outbound_subnet = {
+          name           = "pdr-dns-outbound-subnet"
           address_prefix = "10.0.4.96/28"
           delegation = [
             {
