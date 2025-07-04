@@ -33,28 +33,28 @@ custom_replacements = {
     connectivity_hub_vwan_resource_group_name    = "rg-hub-vwan-$${starter_location_01}"
     connectivity_hub_primary_resource_group_name = "rg-hub-$${starter_location_01}"
     dns_resource_group_name                      = "rg-hub-dns-$${starter_location_01}"
-    ddos_resource_group_name                     = "rg-hub-ddos-$${starter_location_01}"
-    asc_export_resource_group_name               = "rg-asc-export-$${starter_location_01}"
+    # ddos_resource_group_name                     = "rg-hub-ddos-$${starter_location_01}"
+    asc_export_resource_group_name = "rg-asc-export-$${starter_location_01}"
 
     # Resource names
-    log_analytics_workspace_name            = "law-management-$${starter_location_01}"
-    ddos_protection_plan_name               = "ddos-$${starter_location_01}"
+    log_analytics_workspace_name = "law-management-$${starter_location_01}"
+    # ddos_protection_plan_name               = "ddos-$${starter_location_01}"
     ama_user_assigned_managed_identity_name = "uami-management-ama-$${starter_location_01}"
     dcr_change_tracking_name                = "dcr-change-tracking"
     dcr_defender_sql_name                   = "dcr-defender-sql"
     dcr_vm_insights_name                    = "dcr-vm-insights"
 
     # Resource provisioning global connectivity
-    ddos_protection_plan_enabled = true
+    ddos_protection_plan_enabled = false
 
     # Resource provisioning primary connectivity
     primary_firewall_enabled                              = true
-    primary_virtual_network_gateway_express_route_enabled = true
-    primary_virtual_network_gateway_vpn_enabled           = true
-    primary_private_dns_zones_enabled                     = true
-    primary_private_dns_auto_registration_zone_enabled    = true
+    primary_virtual_network_gateway_express_route_enabled = false
+    primary_virtual_network_gateway_vpn_enabled           = false
+    primary_private_dns_zones_enabled                     = false
+    primary_private_dns_auto_registration_zone_enabled    = false
     primary_private_dns_resolver_enabled                  = true
-    primary_bastion_enabled                               = true
+    primary_bastion_enabled                               = false
     primary_sidecar_virtual_network_enabled               = true
 
     # Resource names primary connectivity
@@ -86,8 +86,8 @@ custom_replacements = {
   NOTE: You cannot refer to another custom resource group identifier in this variable.
   */
   resource_group_identifiers = {
-    management_resource_group_id           = "/subscriptions/$${subscription_id_management}/resourcegroups/$${management_resource_group_name}"
-    ddos_protection_plan_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourcegroups/$${ddos_resource_group_name}"
+    management_resource_group_id = "/subscriptions/$${subscription_id_management}/resourcegroups/$${management_resource_group_name}"
+    # ddos_protection_plan_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourcegroups/$${ddos_resource_group_name}"
   }
 
   /*
@@ -102,11 +102,11 @@ custom_replacements = {
     ama_vm_insights_data_collection_rule_id     = "$${management_resource_group_id}/providers/Microsoft.Insights/dataCollectionRules/$${dcr_vm_insights_name}"
     ama_user_assigned_managed_identity_id       = "$${management_resource_group_id}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$${ama_user_assigned_managed_identity_name}"
     log_analytics_workspace_id                  = "$${management_resource_group_id}/providers/Microsoft.OperationalInsights/workspaces/$${log_analytics_workspace_name}"
-    ddos_protection_plan_id                     = "$${ddos_protection_plan_resource_group_id}/providers/Microsoft.Network/ddosProtectionPlans/$${ddos_protection_plan_name}"
+    # ddos_protection_plan_id                     = "$${ddos_protection_plan_resource_group_id}/providers/Microsoft.Network/ddosProtectionPlans/$${ddos_protection_plan_name}"
   }
 }
 
-enable_telemetry = true
+enable_telemetry = false
 
 /*
 --- Tags ---
@@ -114,7 +114,7 @@ This variable can be used to apply tags to all resources that support it. Some r
 */
 tags = {
   deployed_by = "terraform"
-  source      = "Azure Landing Zones Accelerator"
+  source      = "CAB Azure Landing Zones Accelerator"
 }
 
 /*
@@ -165,16 +165,16 @@ management_group_settings = {
     ama_user_assigned_managed_identity_id       = "$${ama_user_assigned_managed_identity_id}"
     ama_user_assigned_managed_identity_name     = "$${ama_user_assigned_managed_identity_name}"
     log_analytics_workspace_id                  = "$${log_analytics_workspace_id}"
-    ddos_protection_plan_id                     = "$${ddos_protection_plan_id}"
-    private_dns_zone_subscription_id            = "$${subscription_id_connectivity}"
-    private_dns_zone_region                     = "$${starter_location_01}"
-    private_dns_zone_resource_group_name        = "$${dns_resource_group_name}"
+    # ddos_protection_plan_id                     = "$${ddos_protection_plan_id}"
+    # private_dns_zone_subscription_id            = "$${subscription_id_connectivity}"
+    # private_dns_zone_region                     = "$${starter_location_01}"
+    # private_dns_zone_resource_group_name        = "$${dns_resource_group_name}"
   }
   subscription_placement = {
-    identity = {
-      subscription_id       = "$${subscription_id_identity}"
-      management_group_name = "identity"
-    }
+    # identity = {
+    #   subscription_id       = "$${subscription_id_identity}"
+    #   management_group_name = "identity"
+    # }
     connectivity = {
       subscription_id       = "$${subscription_id_connectivity}"
       management_group_name = "connectivity"
@@ -188,23 +188,7 @@ management_group_settings = {
     alz = {
       policy_assignments = {
         Deploy-MDFC-Config-H224 = {
-          parameters = {
-            ascExportResourceGroupName                  = "$${asc_export_resource_group_name}"
-            ascExportResourceGroupLocation              = "$${starter_location_01}"
-            emailSecurityContact                        = "$${defender_email_security_contact}"
-            enableAscForServers                         = "DeployIfNotExists"
-            enableAscForServersVulnerabilityAssessments = "DeployIfNotExists"
-            enableAscForSql                             = "DeployIfNotExists"
-            enableAscForAppServices                     = "DeployIfNotExists"
-            enableAscForStorage                         = "DeployIfNotExists"
-            enableAscForContainers                      = "DeployIfNotExists"
-            enableAscForKeyVault                        = "DeployIfNotExists"
-            enableAscForSqlOnVm                         = "DeployIfNotExists"
-            enableAscForArm                             = "DeployIfNotExists"
-            enableAscForOssDb                           = "DeployIfNotExists"
-            enableAscForCosmosDbs                       = "DeployIfNotExists"
-            enableAscForCspm                            = "DeployIfNotExists"
-          }
+          enforcement_mode = "DoNotEnforce"
         }
       }
     }
@@ -228,13 +212,13 @@ You can use this section to customize the virtual wan networking that will be de
 connectivity_type = "virtual_wan"
 
 connectivity_resource_groups = {
-  ddos = {
-    name     = "$${ddos_resource_group_name}"
-    location = "$${starter_location_01}"
-    settings = {
-      enabled = "$${ddos_protection_plan_enabled}"
-    }
-  }
+  # ddos = {
+  #   name     = "$${ddos_resource_group_name}"
+  #   location = "$${starter_location_01}"
+  #   settings = {
+  #     enabled = "$${ddos_protection_plan_enabled}"
+  #   }
+  # }
   vwan = {
     name     = "$${connectivity_hub_vwan_resource_group_name}"
     location = "$${starter_location_01}"
@@ -262,11 +246,29 @@ virtual_wan_settings = {
   name                = "vwan-$${starter_location_01}"
   resource_group_name = "$${connectivity_hub_vwan_resource_group_name}"
   location            = "$${starter_location_01}"
-  ddos_protection_plan = {
-    enabled             = "$${ddos_protection_plan_enabled}"
-    name                = "$${ddos_protection_plan_name}"
-    resource_group_name = "$${ddos_resource_group_name}"
-    location            = "$${starter_location_01}"
+  # ddos_protection_plan = {
+  #   enabled             = "$${ddos_protection_plan_enabled}"
+  #   name                = "$${ddos_protection_plan_name}"
+  #   resource_group_name = "$${ddos_resource_group_name}"
+  #   location            = "$${starter_location_01}"
+  # }
+  routing_intents = {
+    intent1 = {
+      name            = "routing-intent-nprd"
+      virtual_hub_key = "primary"
+      routing_policies = [
+        {
+          name                  = "internet"
+          destinations          = ["Internet"]
+          next_hop_firewall_key = "primary"
+        },
+        {
+          name                  = "private"
+          destinations          = ["PrivateTraffic"]
+          next_hop_firewall_key = "primary"
+        }
+      ]
+    }
   }
 }
 
@@ -292,6 +294,71 @@ virtual_wan_virtual_hubs = {
     }
     firewall_policy = {
       name = "$${primary_firewall_policy_name}"
+      dns = {
+        servers       = ["10.0.4.84"]
+        proxy_enabled = true
+      }
+    }
+    private_dns_resolver = {
+      enabled               = "$${primary_private_dns_resolver_enabled}"
+      subnet_address_prefix = "$${primary_private_dns_resolver_subnet_address_prefix}"
+      dns_resolver = {
+        name = "$${primary_private_dns_resolver_name}"
+        inbound_endpoints = {
+          nprd_in_endpoint = {
+            name                         = "nrpd-dns-inbound"
+            subnet_name                  = "nprd-dns-inbound-subnet"
+            private_ip_allocation_method = "Static"
+            private_ip_address           = "10.0.4.84"
+          }
+        }
+        outbound_endpoints = {
+          nprd_out_endpoint = {
+            name        = "nrpd-dns-outbound"
+            subnet_name = "nprd-dns-outbound-subnet"
+
+            forwarding_ruleset = {
+              ruleset1 = {
+                name = "forwarding-ruleset-nprd"
+
+                link_with_outbound_endpoint_virtual_network = true
+
+                metadata_for_outbound_endpoint_virtual_network_link = {
+                  environment = "NonProd"
+                  owner       = "BDO team"
+                }
+
+                # additional_virtual_network_links = {
+                #   link1 = {
+                #     name    = "extra-vnet-link-eastus"
+                #     vnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-eastus/providers/Microsoft.Network/virtualNetworks/vnet-eastus"
+                #     metadata = {
+                #       purpose = "failover"
+                #       zone    = "eastus"
+                #     }
+                #   }
+                # }
+
+                rules = {
+                  rule1 = {
+                    name        = "rule-to-google"
+                    domain_name = "google.com."
+                    enabled     = true
+                    destination_ip_addresses = {
+                      "8.8.8.8" = "53"
+                      "8.8.4.4" = "53"
+                    }
+                    metadata = {
+                      note = "Public DNS forwarding"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
     }
     virtual_network_gateways = {
       express_route = {
@@ -338,6 +405,32 @@ virtual_wan_virtual_hubs = {
       name          = "$${primary_sidecar_virtual_network_name}"
       address_space = ["$${primary_side_car_virtual_network_address_space}"]
       # virtual_network_connection_name = "private_dns_vnet_primary"  # Backwards compatibility
+      subnets = {
+        nprd_dns_inbound_subnet = {
+          name           = "nprd-dns-inbound-subnet"
+          address_prefix = "10.0.4.80/28"
+          delegation = [
+            {
+              name = "dns-inbound-delegation"
+              service_delegation = {
+                name = "Microsoft.Network/dnsResolvers"
+              }
+            }
+          ]
+        }
+        nprd_dns_outbound_subnet = {
+          name           = "nprd-dns-outbound-subnet"
+          address_prefix = "10.0.4.96/28"
+          delegation = [
+            {
+              name = "dns-outbound-delegation"
+              service_delegation = {
+                name = "Microsoft.Network/dnsResolvers"
+              }
+            }
+          ]
+        }
+      }
     }
   }
 }
