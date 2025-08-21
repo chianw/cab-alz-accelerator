@@ -26,7 +26,7 @@ custom_replacements = {
   */
   names = {
     # Defender email security contact
-    defender_email_security_contact = "chianwong@microsoft.com"
+    defender_email_security_contact = "replace_me@replace_me.com"
 
     # Resource group names
     management_resource_group_name = "rg-management-$${starter_location_01}"
@@ -65,7 +65,7 @@ custom_replacements = {
   }
 }
 
-enable_telemetry = false
+enable_telemetry = true
 
 /*
 --- Tags ---
@@ -73,7 +73,7 @@ This variable can be used to apply tags to all resources that support it. Some r
 */
 tags = {
   deployed_by = "terraform"
-  source      = "BCA ALZ"
+  source      = "Azure Landing Zones Accelerator"
 }
 
 /*
@@ -177,14 +177,7 @@ management_group_settings = {
         }
       }
     }
-    prod = {
-      policy_assignments = {
-        Deploy-Private-DNS-Zones = {
-          enforcement_mode = "DoNotEnforce"
-        }
-      }
-    }
-    nprd = {
+    corp = {
       policy_assignments = {
         Deploy-Private-DNS-Zones = {
           enforcement_mode = "DoNotEnforce"

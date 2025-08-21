@@ -26,7 +26,7 @@ custom_replacements = {
   */
   names = {
     # Defender email security contact
-    defender_email_security_contact = "replace_me@replace_me.com"
+    defender_email_security_contact = "chianwong@microsoft.com"
 
     # Resource group names
     management_resource_group_name               = "rg-management-$${starter_location_01}"
@@ -44,17 +44,17 @@ custom_replacements = {
     dcr_vm_insights_name                    = "dcr-vm-insights"
 
     # Resource provisioning global connectivity
-    ddos_protection_plan_enabled = true
+    ddos_protection_plan_enabled = false
 
     # Resource provisioning primary connectivity
-    primary_firewall_enabled                              = true
-    primary_firewall_management_ip_enabled                = true
-    primary_virtual_network_gateway_express_route_enabled = true
-    primary_virtual_network_gateway_vpn_enabled           = true
-    primary_private_dns_zones_enabled                     = true
-    primary_private_dns_auto_registration_zone_enabled    = true
-    primary_private_dns_resolver_enabled                  = true
-    primary_bastion_enabled                               = true
+    primary_firewall_enabled                              = false
+    primary_firewall_management_ip_enabled                = false
+    primary_virtual_network_gateway_express_route_enabled = false
+    primary_virtual_network_gateway_vpn_enabled           = false
+    primary_private_dns_zones_enabled                     = false
+    primary_private_dns_auto_registration_zone_enabled    = false
+    primary_private_dns_resolver_enabled                  = false
+    primary_bastion_enabled                               = false
 
     # Resource names primary connectivity
     primary_virtual_network_name                                 = "vnet-hub-$${starter_location_01}"
@@ -114,7 +114,7 @@ custom_replacements = {
   }
 }
 
-enable_telemetry = true
+enable_telemetry = false
 
 /*
 --- Tags ---
@@ -122,7 +122,7 @@ This variable can be used to apply tags to all resources that support it. Some r
 */
 tags = {
   deployed_by = "terraform"
-  source      = "Azure Landing Zones Accelerator"
+  source      = "BCA ALZ"
 }
 
 /*
@@ -158,7 +158,7 @@ You can use this section to customize the management groups and policies that wi
 You can further configure management groups and policy by supplying a `lib` folder. This is detailed in the Accelerator documentation.
 */
 management_group_settings = {
-  enable_telemetry = true
+  enable_telemetry = false
   # This is the name of the architecture that will be used to deploy the management resources.
   # It refers to the alz_custom.alz_architecture_definition.yaml file in the lib folder.
   # Do not change this value unless you have created another architecture definition
@@ -173,10 +173,10 @@ management_group_settings = {
     ama_user_assigned_managed_identity_id       = "$${ama_user_assigned_managed_identity_id}"
     ama_user_assigned_managed_identity_name     = "$${ama_user_assigned_managed_identity_name}"
     log_analytics_workspace_id                  = "$${log_analytics_workspace_id}"
-    ddos_protection_plan_id                     = "$${ddos_protection_plan_id}"
-    private_dns_zone_subscription_id            = "$${subscription_id_connectivity}"
-    private_dns_zone_region                     = "$${starter_location_01}"
-    private_dns_zone_resource_group_name        = "$${dns_resource_group_name}"
+    # ddos_protection_plan_id                     = "$${ddos_protection_plan_id}"
+    # private_dns_zone_subscription_id            = "$${subscription_id_connectivity}"
+    # private_dns_zone_region                     = "$${starter_location_01}"
+    # private_dns_zone_resource_group_name        = "$${dns_resource_group_name}"
   }
   subscription_placement = {
     identity = {

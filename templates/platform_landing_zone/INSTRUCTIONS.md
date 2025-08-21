@@ -1,6 +1,6 @@
 ## to run plan 
 ```
-terraform plan -var-file="/Users/jzwong/Library/CloudStorage/OneDrive-Microsoft/git/bca/alz-terraform-accelerator/templates/platform_landing_zone/examples/full-single-region/virtual-wan.tfvars"
+terraform plan -var-file="/Users/jzwong/Library/CloudStorage/OneDrive-Microsoft/git/bca/alz-terraform-accelerator/templates/platform_landing_zone/examples/full-single-region-nva/hub-and-spoke-vnet.tfvars"
 ```
 
 ## subscription-ids are entered into terraform.tfvars.json file

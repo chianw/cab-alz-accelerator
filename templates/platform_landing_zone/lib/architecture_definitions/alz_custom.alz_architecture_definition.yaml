@@ -1,7 +1,7 @@
 name: alz_custom
 management_groups:
   - id: alz
-    display_name: Azure Landing Zones
+    display_name: BCA root
     archetypes:
       - root_custom
     exists: false
@@ -21,17 +21,17 @@ management_groups:
     exists: false
     parent_id: alz
 
-  - id: corp
-    display_name: Corp
+  - id: prod
+    display_name: Prod
     archetypes:
-      - corp_custom
+      - prod
     exists: false
     parent_id: landingzones
 
-  - id: online
-    display_name: Online
+  - id: nprd
+    display_name: NProd
     archetypes:
-      - online_custom
+      - nprd
     exists: false
     parent_id: landingzones
 
@@ -62,6 +62,13 @@ management_groups:
       - identity_custom
     exists: false
     parent_id: platform
+
+  - id: security
+    display_name: Security
+    archetypes:
+      - security
+    exists: false
+    parent_id: platform   
 
   - id: decommissioned
     display_name: Decommissioned
