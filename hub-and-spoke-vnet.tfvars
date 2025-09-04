@@ -57,6 +57,8 @@ custom_replacements = {
     # Resource names primary connectivity
     primary_virtual_network_name                                 = "bcavnet-hub-$${starter_location_01}"
     primary_subnet_nva_name                                      = "bcasubnet-nva-$${starter_location_01}"
+    primary_subnet_nva_trust_name                                = "bcasubnet-nva-trust-$${starter_location_01}"
+    primary_subnet_nva_untrust_name                              = "bcasubnet-nva-untrust-$${starter_location_01}"
     primary_route_table_firewall_name                            = "bcart-hub-fw-$${starter_location_01}"
     primary_route_table_user_subnets_name                        = "bcart-hub-std-$${starter_location_01}"
     primary_virtual_network_gateway_express_route_name           = "vgw-hub-er-$${starter_location_01}"
@@ -76,6 +78,8 @@ custom_replacements = {
     primary_hub_address_space                          = "10.0.0.0/16"
     primary_hub_virtual_network_address_space          = "10.0.0.0/22"
     primary_nva_subnet_address_prefix                  = "10.0.0.0/26"
+    primary_nva_trust_subnet_address_prefix            = "10.0.0.64/26"
+    primary_nva_untrust_subnet_address_prefix          = "10.0.0.128/26"
     primary_nva_ip_address                             = "10.0.0.4"
     primary_bastion_subnet_address_prefix              = "10.0.0.64/26"
     primary_gateway_subnet_address_prefix              = "10.0.0.128/27"
@@ -278,6 +282,14 @@ hub_and_spoke_vnet_virtual_networks = {
         nva = {
           name             = "$${primary_subnet_nva_name}"
           address_prefixes = ["$${primary_nva_subnet_address_prefix}"]
+        }
+        nva_trust = {
+          name             = "$${primary_subnet_nva_trust_name}"
+          address_prefixes = ["$${primary_nva_trust_subnet_address_prefix}"]
+        }
+        nva_untrust = {
+          name             = "$${primary_subnet_nva_untrust_name}"
+          address_prefixes = ["$${primary_nva_untrust_subnet_address_prefix}"]
         }
       }
     }
