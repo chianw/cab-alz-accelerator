@@ -31,3 +31,14 @@ provider "azurerm" {
   }
 }
 ```
+
+## Module call path
+the primary hub object is defined in https://github.com/Azure/terraform-azurerm-avm-ptn-hubnetworking/blob/main/variables.tf#L12 
+```
+Azure/avm-ptn-alz-connectivity-hub-and-spoke-vnet/azurerm --> Azure/avm-ptn-hubnetworking/azurerm 
+
+https://github.com/Azure/terraform-azurerm-avm-ptn-alz-connectivity-hub-and-spoke-vnet/blob/main/main.tf
+
+https://github.com/Azure/terraform-azurerm-avm-ptn-hubnetworking/blob/main/variables.tf
+
+```
