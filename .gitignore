@@ -51,4 +51,4 @@ issues.csv
 
 output.json
 
-.github
+*.github
