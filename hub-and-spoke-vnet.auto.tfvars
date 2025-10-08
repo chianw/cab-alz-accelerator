@@ -282,14 +282,23 @@ hub_and_spoke_vnet_virtual_networks = {
         nva = {
           name             = "$${primary_subnet_nva_name}"
           address_prefixes = ["$${primary_nva_subnet_address_prefix}"]
+          network_security_group = {
+            id = "/subscriptions/68be2809-9674-447c-a43d-261ef2862c29/resourcegroups/rg-bcansgtest/providers/Microsoft.Network/networkSecurityGroups/bcatestnsg"
+          }
         }
         nva_trust = {
           name             = "$${primary_subnet_nva_trust_name}"
           address_prefixes = ["$${primary_nva_trust_subnet_address_prefix}"]
+          network_security_group = {
+            id = "/subscriptions/68be2809-9674-447c-a43d-261ef2862c29/resourcegroups/rg-bcansgtest/providers/Microsoft.Network/networkSecurityGroups/bcatestnsg"
+          }
         }
         nva_untrust = {
           name             = "$${primary_subnet_nva_untrust_name}"
           address_prefixes = ["$${primary_nva_untrust_subnet_address_prefix}"]
+          network_security_group = {
+            id = "/subscriptions/68be2809-9674-447c-a43d-261ef2862c29/resourcegroups/rg-bcansgtest/providers/Microsoft.Network/networkSecurityGroups/bcatestnsg"
+          }
         }
       }
     }
